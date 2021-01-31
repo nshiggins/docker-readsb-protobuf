@@ -19,25 +19,26 @@ if [[ -n "$INFLUXDBURL" ]]; then
 
   ##### TELEGRAF CONFIG - OUTPUT TO INFLUXDB #####
   {
-    echo "[[outputs.influxdb]]"
+
+    echo "[[outputs.influxdb_v2]]""
+    ## The URLs of the InfluxDB cluster nodes.
+    ##
+    ## Multiple URLs can be specified for a single cluster, only ONE of the
+    ## urls will be written to each interval.
+    ## urls exp: http://127.0.0.1:8086
+    ## urls = ["http://beta:8086"]
 
     # Add InfluxDB URL
     echo " urls = [\"${INFLUXDBURL}\"]"
 
-    # Finish config
-    echo 'database = "readsb"'
-    echo 'skip_database_creation = false'
-    echo 'timeout = "5s"'
+    ## Token for authentication.
+    token = "$INFLUXDBTOKEN"
 
-    # If set, add InfluxDB username
-    if [[ -n "${INFLUXDBUSERNAME+x}" ]]; then
-      echo "username = \"${INFLUXDBUSERNAME}\""
-    fi
+    ## Organization is the name of the organization you wish to write to; must exist.
+    organization = "nshiggins.com"
 
-    # If set, add InfluxDB password
-    if [[ -n "${INFLUXDBPASSWORD+x}" ]]; then
-      echo "password = \"${INFLUXDBPASSWORD}\""
-    fi
+    ## Destination bucket to write into.
+    bucket = "adsb"
 
   } > "$OUTPUT_INFLUXDB_CONFIG_FILE"
 
