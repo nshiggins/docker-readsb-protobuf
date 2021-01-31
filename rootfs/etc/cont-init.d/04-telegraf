@@ -32,13 +32,13 @@ if [[ -n "$INFLUXDBURL" ]]; then
     echo " urls = [\"${INFLUXDBURL}\"]"
 
     ## Token for authentication.
-    token = "$INFLUXDBTOKEN"
+    echo " token = \"$INFLUXDBTOKEN\""
 
     ## Organization is the name of the organization you wish to write to; must exist.
-    organization = "nshiggins.com"
+    echo "organization = \"nshiggins.com\""
 
     ## Destination bucket to write into.
-    bucket = "adsb"
+    echo "bucket = \"adsb\""
 
   } > "$OUTPUT_INFLUXDB_CONFIG_FILE"
 
